@@ -17,8 +17,10 @@ class Block:
     self.hash = self.hash_block()
 
   def hash_block(self):
-    sha = hasher.sha256(str(random.getrandbits(256)).encode('utf-8')).hexdigest()
-    sha.update(str(self.index) + str(self.timestamp) + str(self.data) + str(self.previous_hash))
+    sha = hasher.sha256()
+    to_hash = str(self.index) + str(self.timestamp) + \
+        str(self.data) + str(self.previous_hash)
+    sha.update(to_hash.encode("utf-8"))
     return sha.hexdigest()
 
 # 제네시스 블록
